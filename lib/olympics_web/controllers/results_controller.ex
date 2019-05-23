@@ -7,8 +7,8 @@ defmodule OlympicsWeb.ResultsController do
         "./1896_2008-AllMedals.csv"
         |> File.stream!(read_ahead: 10_000)
         |> CSVParser.parse_stream
-        |> Enum.map(fn([city, edition, _sport, _discipline, athlete, noc, _gender, _event, _event_gender, medal]) ->
-          %{host: city, year: edition, medal: medal, country: noc, athlete: athlete}
+        |> Enum.map(fn([city, edition, sport, discipline, athlete, noc, _gender, event, _event_gender, medal]) ->
+          %{host: city, year: edition, medal: medal, country: noc, athlete: athlete, sport: sport, discipline: discipline, event: event}
         end)
     end
 

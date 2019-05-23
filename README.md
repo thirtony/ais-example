@@ -36,7 +36,7 @@ It has been kept simple and tries to limit its use of some elixir specific funct
 This file loads and processes the CSV file for each request. It isn't designed to be optimised, simply a demonstration of collecting the data required for each query. It maps a limited subset of the data required for future queries and renames some during processing. Below shows the mapping between the json structure and the original csv fields:
 
 ```
-%{host: city, year: edition, medal: medal, country: noc, athlete: athlete}
+%{host: city, year: edition, medal: medal, country: noc, athlete: athlete, sport: sport, discipline: discipline, event: event}
 ```
 
 The following code was added to process the CSV results (one line per medal) into a structure organised around year. It was designed to take a list of results to allow composition of filtering prior to reorganisation.
