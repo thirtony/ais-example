@@ -5,7 +5,7 @@ defmodule OlympicsWeb.ResultsController do
 
     def get_all_results() do
         "./1896_2008-AllMedals.csv"
-        |> File.stream!(read_ahead: 100_000)
+        |> File.stream!(read_ahead: 10_000)
         |> CSVParser.parse_stream
         |> Enum.map(fn([city, edition, _sport, _discipline, athlete, noc, _gender, _event, _event_gender, medal]) ->
           %{host: city, year: edition, medal: medal, country: noc, athlete: athlete}
@@ -41,7 +41,7 @@ defmodule OlympicsWeb.ResultsController do
         |> send_resp(200, Jason.encode!(results))
     end
 
-    def get_by_year(conn, %{"year" => year}) do
+    def get_for_year(conn, %{"year" => year}) do
         results_for_year = filter_results_to_year(get_all_results(), year)
 
         conn
@@ -49,7 +49,7 @@ defmodule OlympicsWeb.ResultsController do
         |> send_resp(200,  Jason.encode!(results_for_year))
     end
 
-    def get_by_country(conn,  %{"year" => year, "country" => country}) do
+    def get_for_year_with_country(conn,  %{"year" => year, "country" => country}) do
         results = Enum.filter(get_all_results(), fn(result) -> result.country == country end)
         filtered_results_for_year = filter_results_to_year(results, year)
 

@@ -10,7 +10,7 @@ defmodule OlympicsWeb.Router do
 
     get "/", ResultsController, :index
 
-    get "/:year/", ResultsController, :get_by_year
-    get "/:year/:country", ResultsController, :get_by_country
+    get "/:year/", ResultsController, :get_for_year
+    get "/:year/:country", ResultsController, :get_for_year_with_country
   end
 end
